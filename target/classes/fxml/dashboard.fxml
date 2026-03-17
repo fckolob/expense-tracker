@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.expensetracker.controller.DashboardController">
+
+    <top>
+        <Label text="Expense Tracker Dashboard"/>
+    </top>
+
+    <center>
+
+        <VBox spacing="10">
+
+            <TableView fx:id="expenseTable"/>
+
+            <HBox spacing="10">
+                <TextField fx:id="categoryField" promptText="Category"/>
+                <TextField fx:id="amountField" promptText="Amount"/>
+                <Button text="Add Expense" onAction="#addExpense"/>
+            </HBox>
+
+            <PieChart fx:id="categoryChart"/>
+
+            <BarChart fx:id="monthlyChart">
+                <xAxis>
+                    <CategoryAxis label="Month"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Amount"/>
+                </yAxis>
+            </BarChart>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>
