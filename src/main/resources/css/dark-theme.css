@@ -1,0 +1,32 @@
+.root {
+    -fx-base: #1e1e1e;
+    -fx-background: #1e1e1e;
+    -fx-control-inner-background: #2a2a2a;
+    -fx-accent: #00bcd4;
+    -fx-focus-color: #00bcd4;
+    -fx-faint-focus-color: transparent;
+    -fx-text-fill: white;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+}
+
+.text-field, .combo-box, .date-picker {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: white;
+}
+
+.table-view {
+    -fx-background-color: #2a2a2a;
+    -fx-control-inner-background: #2a2a2a;
+}
+
+.chart {
+    -fx-background-color: #1e1e1e;
+}

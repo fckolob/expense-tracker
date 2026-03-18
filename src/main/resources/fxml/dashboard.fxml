@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.chart.*?>
 
@@ -10,34 +8,79 @@
             fx:controller="com.expensetracker.controller.DashboardController">
 
     <top>
-        <Label text="Expense Tracker Dashboard"/>
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <Label text="Expense Tracker Dashboard"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        </VBox>
     </top>
 
     <center>
+        <ScrollPane fitToWidth="true">
+            <VBox spacing="20" style="-fx-padding: 15;">
 
-        <VBox spacing="10">
+                <!-- FILTERS -->
+                <HBox spacing="10">
+                    <TextField fx:id="filterCategoryField" promptText="Category"/>
+                    <ComboBox fx:id="filterMonthBox" promptText="Month"/>
+                    <Button text="Apply Filters" onAction="#applyFilters"/>
+                    <Button text="Clear Filters" onAction="#clearFilters"/>
+                    <Button text="Export Excel" onAction="#exportToExcel"/>
+                </HBox>
 
-            <TableView fx:id="expenseTable"/>
+                <!-- TABLE -->
+                <TableView fx:id="expenseTable" prefHeight="250">
+                    <columns>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
+                        <TableColumn fx:id="colCategory" text="Category" prefWidth="120"/>
+                        <TableColumn fx:id="colAmount" text="Amount" prefWidth="100"/>
+                        <TableColumn fx:id="colDescription" text="Description" prefWidth="200"/>
+                        <TableColumn fx:id="colActions" text="Actions" prefWidth="150"/>
+                    </columns>
+                </TableView>
 
-            <HBox spacing="10">
-                <TextField fx:id="categoryField" promptText="Category"/>
-                <TextField fx:id="amountField" promptText="Amount"/>
-                <Button text="Add Expense" onAction="#addExpense"/>
-            </HBox>
+                <!-- ADD -->
+                <HBox spacing="10">
+                    <DatePicker fx:id="datePicker"/>
+                    <TextField fx:id="categoryField" promptText="Category"/>
+                    <TextField fx:id="amountField" promptText="Amount"/>
+                    <TextField fx:id="descriptionField" promptText="Description"/>
+                    <Button text="Add Expense" onAction="#addExpense"/>
+                </HBox>
 
-            <PieChart fx:id="categoryChart"/>
+                <!-- PIE -->
+                <VBox spacing="5">
+                    <Label text="Expenses by Category"/>
+                    <PieChart fx:id="categoryChart" prefHeight="300"/>
+                </VBox>
 
-            <BarChart fx:id="monthlyChart">
-                <xAxis>
-                    <CategoryAxis label="Month"/>
-                </xAxis>
-                <yAxis>
-                    <NumberAxis label="Amount"/>
-                </yAxis>
-            </BarChart>
+                <!-- BAR -->
+                <VBox spacing="5">
+                    <Label text="Monthly Expenses"/>
+                    <BarChart fx:id="barChart" prefHeight="300">
+                        <xAxis>
+                            <CategoryAxis label="Month"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Amount"/>
+                        </yAxis>
+                    </BarChart>
+                </VBox>
 
-        </VBox>
+                <!-- LINE -->
+                <VBox spacing="5">
+                    <Label text="Expenses Over Time"/>
+                    <LineChart fx:id="lineChart" prefHeight="300">
+                        <xAxis>
+                            <CategoryAxis label="Date"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Amount"/>
+                        </yAxis>
+                    </LineChart>
+                </VBox>
 
+            </VBox>
+        </ScrollPane>
     </center>
 
 </BorderPane>

@@ -1,4 +1,5 @@
 com\expensetracker\model\Expense.class
+com\expensetracker\controller\DashboardController$1.class
 com\expensetracker\repository\ExpenseRepository.class
 com\expensetracker\service\ExpenseService.class
 com\expensetracker\util\DateUtil.class

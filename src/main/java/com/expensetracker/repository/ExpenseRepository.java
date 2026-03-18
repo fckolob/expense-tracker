@@ -57,5 +57,33 @@ public class ExpenseRepository {
 
         return list;
     }
+
+    public void delete(int id) {
+    String sql = "DELETE FROM expenses WHERE id=?";
+    try (Connection conn = DatabaseConfig.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+public void update(Expense expense) {
+    String sql = "UPDATE expenses SET date=?, category=?, amount=?, description=? WHERE id=?";
+    try (Connection conn = DatabaseConfig.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, expense.getDate().toString());
+        stmt.setString(2, expense.getCategory());
+        stmt.setDouble(3, expense.getAmount());
+        stmt.setString(4, expense.getDescription());
+        stmt.setInt(5, expense.getId());
+
+        stmt.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 }
 

@@ -16,4 +16,12 @@ public class ExpenseService {
     public List<Expense> getExpenses(){
         return repository.findAll();
     }
+
+    public void deleteExpense(int id){
+    repository.delete(id);
+}
+
+public void updateExpense(Expense expense){
+    repository.update(expense);
+}
 }
