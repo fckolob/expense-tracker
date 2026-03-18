@@ -195,40 +195,83 @@ public class DashboardController {
         updateCharts(service.getExpenses());
     }
 
-    private void updateCharts(List<Expense> expenses) {
+   private void updateCharts(List<Expense> expenses) {
 
-        // PIE
-        Map<String, Double> catMap = new HashMap<>();
-        for (Expense e : expenses) {
-            catMap.put(e.getCategory(),
-                    catMap.getOrDefault(e.getCategory(), 0.0) + e.getAmount());
-        }
+    // =======================
+    //  PIE CHART (CATEGORY)
+    // =======================
+    Map<String, Double> catMap = new HashMap<>();
 
-        categoryChart.getData().clear();
-        catMap.forEach((k, v) ->
-                categoryChart.getData().add(new PieChart.Data(k, v)));
-
-        // BAR
-        Map<String, Double> monthMap = new HashMap<>();
-        for (Expense e : expenses) {
-            String m = e.getDate().getMonth().toString();
-            monthMap.put(m, monthMap.getOrDefault(m, 0.0) + e.getAmount());
-        }
-
-        barChart.getData().clear();
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        monthMap.forEach((k, v) ->
-                series.getData().add(new XYChart.Data<>(k, v)));
-        barChart.getData().add(series);
-
-        // LINE
-        lineChart.getData().clear();
-        XYChart.Series<String, Number> line = new XYChart.Series<>();
-        for (Expense e : expenses) {
-            line.getData().add(new XYChart.Data<>(e.getDate().toString(), e.getAmount()));
-        }
-        lineChart.getData().add(line);
+    for (Expense e : expenses) {
+        catMap.put(
+                e.getCategory(),
+                catMap.getOrDefault(e.getCategory(), 0.0) + e.getAmount()
+        );
     }
+
+    categoryChart.getData().clear();
+    catMap.forEach((k, v) ->
+            categoryChart.getData().add(new PieChart.Data(k, v))
+    );
+
+
+    // =======================
+    //  BAR CHART (MONTHS ORDERED)
+    // =======================
+    Map<Integer, Double> monthMap = new HashMap<>();
+
+    for (Expense e : expenses) {
+        int month = e.getDate().getMonthValue(); // 1–12
+        monthMap.put(
+                month,
+                monthMap.getOrDefault(month, 0.0) + e.getAmount()
+        );
+    }
+
+    barChart.getData().clear();
+    XYChart.Series<String, Number> barSeries = new XYChart.Series<>();
+
+    // ✅ SORT MONTHS
+    monthMap.entrySet().stream()
+            .sorted(Map.Entry.comparingByKey())
+            .forEach(entry -> {
+                String monthName = java.time.Month.of(entry.getKey()).toString();
+                barSeries.getData().add(
+                        new XYChart.Data<>(monthName, entry.getValue())
+                );
+            });
+
+    barChart.getData().add(barSeries);
+
+
+    // =======================
+    //  LINE CHART (SORTED + GROUPED BY DATE)
+    // =======================
+    Map<String, Double> dateMap = new HashMap<>();
+
+    for (Expense e : expenses) {
+        String date = e.getDate().toString();
+
+        dateMap.put(
+                date,
+                dateMap.getOrDefault(date, 0.0) + e.getAmount()
+        );
+    }
+
+    lineChart.getData().clear();
+    XYChart.Series<String, Number> lineSeries = new XYChart.Series<>();
+
+    // ✅ SORT DATES
+    dateMap.entrySet().stream()
+            .sorted(Map.Entry.comparingByKey())
+            .forEach(entry -> {
+                lineSeries.getData().add(
+                        new XYChart.Data<>(entry.getKey(), entry.getValue())
+                );
+            });
+
+    lineChart.getData().add(lineSeries);
+}
 
     @FXML
     public void applyFilters() {

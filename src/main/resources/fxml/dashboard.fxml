@@ -40,7 +40,8 @@
 
                 <!-- ADD -->
                 <HBox spacing="10">
-                    <DatePicker fx:id="datePicker"/>
+                    <DatePicker fx:id="datePicker"
+                    promptText="Select date"/>
                     <TextField fx:id="categoryField" promptText="Category"/>
                     <TextField fx:id="amountField" promptText="Amount"/>
                     <TextField fx:id="descriptionField" promptText="Description"/>
