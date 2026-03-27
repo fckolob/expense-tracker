@@ -231,7 +231,7 @@ public class DashboardController {
     barChart.getData().clear();
     XYChart.Series<String, Number> barSeries = new XYChart.Series<>();
 
-    // ✅ SORT MONTHS
+    // SORT MONTHS
     monthMap.entrySet().stream()
             .sorted(Map.Entry.comparingByKey())
             .forEach(entry -> {
