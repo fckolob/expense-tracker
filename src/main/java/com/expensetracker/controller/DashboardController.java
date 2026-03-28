@@ -261,7 +261,7 @@ public class DashboardController {
     lineChart.getData().clear();
     XYChart.Series<String, Number> lineSeries = new XYChart.Series<>();
 
-    // ✅ SORT DATES
+    // SORT DATES
     dateMap.entrySet().stream()
             .sorted(Map.Entry.comparingByKey())
             .forEach(entry -> {

@@ -6,9 +6,8 @@ This software follows a model view controller architecture, also isolating the i
 
 The purpose of this software is to give the user the abillity of record and manage his daily expenses with a good UX and to see analize the evolution and composition of his expenses to take better desitions of how to use his money more efficiently.  
 
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
 
-[Software Demo Video](http://youtube.link.goes.here)
+Software Demo Video: https://youtu.be/iTLZxxEfchs
 
 # Development Environment
 
@@ -18,7 +17,6 @@ The program is writen in Java mostly, also a pom.xml file is used to manage depe
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
 
 - Official Java Api documentation: https://docs.oracle.com/en/java/javase/21/docs/api/index.html
 
